@@ -1,9 +1,21 @@
 ---
 import Card from '../components/Card.astro';
 import Layout from '../layouts/Layout.astro';
+import Bento from '../components/Bento.astro';
+import Inicio from '../components/inicio.astro';
 
 ---
 
 <Layout>
+	
+	<Inicio />
+	<Bento />
 	<Card />
 </Layout>
+
+<style>
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+</style>

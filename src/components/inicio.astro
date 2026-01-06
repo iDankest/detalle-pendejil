@@ -1,0 +1,72 @@
+<script>
+  import { gsap } from "gsap";
+  import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+  gsap.registerPlugin(ScrollToPlugin);
+
+  const neurons = document.querySelectorAll(".neuron");
+  
+  neurons.forEach((n, i) => {
+    // Posición inicial en el centro
+    gsap.set(n, { 
+      left: "50%", 
+      top: "50%", 
+      xPercent: -50, 
+      yPercent: -50,
+      opacity: 0.8
+    });
+
+    // Animación de órbita caótica
+    gsap.to(n, {
+      x: `random(-400, 400)`,
+      y: `random(-400, 400)`,
+      rotation: `random(-720, 720)`,
+      scale: `random(0.5, 1.2)`,
+      duration: `random(4, 8)`,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      delay: i * 0.1
+    });
+  });
+
+  // Efecto al clickar: Bajamos al Bento de los Memes
+  document.getElementById("start-btn")?.addEventListener("click", () => {
+    gsap.to(window, {
+      duration: 1.5,
+      scrollTo: "#gallery-8", // Tu ID del Bento
+      ease: "power3.inOut"
+    });
+  });
+</script>
+
+<section class="inicio relative h-screen w-full bg-slate-950 overflow-hidden flex items-center justify-center">
+  
+  <div class="relative z-50">
+    <button id="start-btn" class="group relative px-12 py-6 bg-transparent border-2 border-blue-500 text-blue-400 font-black text-2xl rounded-full overflow-hidden transition-all hover:bg-blue-500 hover:text-white shadow-[0_0_20px_rgba(59,130,246,0.5)]">
+      <span class="relative z-10">COMPARTIR NEURONA</span>
+      <div class="absolute inset-0 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+    </button>
+  </div>
+
+  <div id="neuron-field" class="absolute inset-0 pointer-events-none">
+    {/* Generaremos 15-20 de estas */}
+    <span class="neuron absolute text-4xl opacity-0">🧠</span>
+    <span class="neuron absolute text-5xl opacity-0">🧠</span>
+    <span class="neuron absolute text-3xl opacity-0">⚡</span>
+    <span class="neuron absolute text-4xl opacity-0">🧠</span>
+    <span class="neuron absolute text-5xl opacity-0">🧠</span>
+    <span class="neuron absolute text-3xl opacity-0">⚡</span>
+  </div>
+</section>
+
+<style>
+#neuron-field {
+  perspective: 1000px;
+  background: radial-gradient(circle at center, #1e293b 0%, #020617 100%);
+}
+
+.neuron {
+  filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.8));
+}
+</style>
