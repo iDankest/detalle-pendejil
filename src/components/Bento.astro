@@ -1,3 +1,16 @@
+---
+const images = [
+  "https://photos.app.goo.gl/yKxyX72NSzs7PKZv9",
+  "https://photos.fife.usercontent.google.com/pw/AP1GczNxN5C46HOFJ_4veW-qpuqZuoc1xJoLxjf24roROjW2vq6Ejv2BJYaM=w748-h1329-s-no-gm?authuser=1",
+  "https://photos.fife.usercontent.google.com/pw/AP1GczNxN5C46HOFJ_4veW-qpuqZuoc1xJoLxjf24roROjW2vq6Ejv2BJYaM=w748-h1329-s-no-gm?authuser=1",
+  "https://lh3.googleusercontent.com/pw/AP1GczONDUvwp…29e_muxgJt9XjAbHnS2j=w510-h907-s-no-gm?authuser=0",
+  "https://lh3.googleusercontent.com/pw/AP1GczMjdRAxFzjctkAkwRfjf_ug1eR0MFiF7_FllluJbEiUoA6fvR_afzG8vaDW5ygB7B-78_0elV33p1CMbxIgx5irBx3x6nL3d6GbO2FBLUN2nncCSUOKYNIglSxvmlS3Xli-w2RYTJPgMN3NVkQ_NVc4=w992-h1323-s-no?authuser=0",
+  "https://assets.codepen.io/16327/portrait-image-3.jpg",
+  "https://lh3.googleusercontent.com/pw/AP1GczONDUvwp…29e_muxgJt9XjAbHnS2j=w510-h907-s-no-gm?authuser=0",
+  "https://lh3.googleusercontent.com/pw/AP1GczONDUvwpb3yGfJG4AL5rVTHjaXKwGJQizPK2lx4Yfkjq5MYCIutmMmgFU2Xu0erophVQPUcctF2uCNX1Xc5Bte2LQakzezAyr2gzM-iYoLi7l8-iLs4EasMr4gLNeaj2Mm129e_muxgJt9XjAbHnS2j=w510-h907-s-no-gm?authuser=1"
+];
+---
+
 <script>
     console.clear();
 
@@ -53,28 +66,28 @@ window.addEventListener("resize", createTween);
 <div class="gallery-wrap">
   <div class="gallery gallery--bento gallery--switch" id="gallery-8">
     <div class="gallery__item">
-      <img src="https://photos.app.goo.gl/yKxyX72NSzs7PKZv9" alt="" />
+      <img src={`${images[0]}`} alt="" />
     </div>
     <div class="gallery__item">
-      <img src="https://photos.fife.usercontent.google.com/pw/AP1GczNxN5C46HOFJ_4veW-qpuqZuoc1xJoLxjf24roROjW2vq6Ejv2BJYaM=w748-h1329-s-no-gm?authuser=1" alt="" />
+      <img src={`${images[1]}`} alt="" />
     </div>
     <div class="gallery__item">
-      <img src="https://photos.fife.usercontent.google.com/pw/AP1GczNxN5C46HOFJ_4veW-qpuqZuoc1xJoLxjf24roROjW2vq6Ejv2BJYaM=w748-h1329-s-no-gm?authuser=1" alt="" />
+      <img src={`${images[2]}`} alt="" />
     </div>
     <div class="gallery__item">
-      <img src="https://lh3.googleusercontent.com/pw/AP1GczONDUvwp…29e_muxgJt9XjAbHnS2j=w510-h907-s-no-gm?authuser=0" alt="" />
+      <img src={`${images[3]}`} alt="" />
     </div>
     <div class="gallery__item">
-      <img src="https://assets.codepen.io/16327/portrait-image-4.jpg" alt="" />
+      <img src={`${images[4]}`} alt="" />
     </div>
     <div class="gallery__item">
-      <img src="https://assets.codepen.io/16327/portrait-image-3.jpg" alt="" />
+      <img src={`${images[5]}`} alt="" />
     </div>
     <div class="gallery__item">
-      <img src="https://assets.codepen.io/16327/portrait-pattern-3.jpg" alt="" />
+      <img src={`${images[6]}`} alt="" />
     </div>
     <div class="gallery__item">
-      <img src="https://assets.codepen.io/16327/portrait-image-1.jpg" alt="" />
+      <img src={`${images[7]}`} alt="" />
     </div>
 
   </div>
