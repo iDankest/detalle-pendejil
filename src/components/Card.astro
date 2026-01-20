@@ -1,0 +1,122 @@
+---
+const images = [
+  "https://photos.app.goo.gl/yKxyX72NSzs7PKZv9",
+  "../public/pendeja-violenta.jpg",
+  "../public/malaga-pen+pena.jpg",
+  "https://lh3.googleusercontent.com/pw/AP1GczONDUvwpb3yGfJG4AL5rVTHjaXKwGJQizPK2lx4Yfkjq5MYCIutmMmgFU2Xu0erophVQPUcctF2uCNX1Xc5Bte2LQakzezAyr2gzM-iYoLi7l8-iLs4EasMr4gLNeaj2Mm129e_muxgJt9XjAbHnS2j=w748-h1329-s-no-gm?authuser=0",
+  "https://lh3.googleusercontent.com/pw/AP1GczONDUvwpb3yGfJG4AL5rVTHjaXKwGJQizPK2lx4Yfkjq5MYCIutmMmgFU2Xu0erophVQPUcctF2uCNX1Xc5Bte2LQakzezAyr2gzM-iYoLi7l8-iLs4EasMr4gLNeaj2Mm129e_muxgJt9XjAbHnS2j=w748-h1329-s-no-gm?authuser=0",
+  "https://lh3.googleusercontent.com/pw/AP1GczONDUvwpb3yGfJG4AL5rVTHjaXKwGJQizPK2lx4Yfkjq5MYCIutmMmgFU2Xu0erophVQPUcctF2uCNX1Xc5Bte2LQakzezAyr2gzM-iYoLi7l8-iLs4EasMr4gLNeaj2Mm129e_muxgJt9XjAbHnS2j=w748-h1329-s-no-gm?authuser=0",
+  "https://lh3.googleusercontent.com/pw/AP1GczONDUvwpb3yGfJG4AL5rVTHjaXKwGJQizPK2lx4Yfkjq5MYCIutmMmgFU2Xu0erophVQPUcctF2uCNX1Xc5Bte2LQakzezAyr2gzM-iYoLi7l8-iLs4EasMr4gLNeaj2Mm129e_muxgJt9XjAbHnS2j=w748-h1329-s-no-gm?authuser=0",
+  "https://lh3.googleusercontent.com/pw/AP1GczONDUvwpb3yGfJG4AL5rVTHjaXKwGJQizPK2lx4Yfkjq5MYCIutmMmgFU2Xu0erophVQPUcctF2uCNX1Xc5Bte2LQakzezAyr2gzM-iYoLi7l8-iLs4EasMr4gLNeaj2Mm129e_muxgJt9XjAbHnS2j=w510-h907-s-no-gm?authuser=1"
+];
+---
+
+<script>
+  import { gsap } from "gsap";
+  import { Flip } from "gsap/dist/Flip";
+  gsap.registerPlugin(Flip);
+
+  document.addEventListener("click", () => {
+    const slider = document.querySelector(".slider");
+    const items = document.querySelectorAll(".item");
+    
+    if (!slider || items.length === 0) return;
+
+    const lastItem = items[items.length - 1];
+
+    // 1. Capturamos el estado inicial
+    const state = Flip.getState(".item");
+
+    // 2. Acción: Mandamos la última al principio
+    slider.prepend(lastItem);
+
+    // 3. Animamos con Flip incluyendo el desvanecimiento
+    Flip.from(state, {
+      duration: 0.6,
+      ease: "power2.inOut",
+      absolute: true,
+      // Animación para la carta que "entra" nueva al principio
+      onEnter: elements => gsap.fromTo(elements, 
+        { opacity: 0, scale: 0.8 }, 
+        { opacity: 1, scale: 1, duration: 0.6 }
+      ),
+      // Animación para que el movimiento de las demás no sea brusco
+      onLeave: elements => gsap.to(elements, 
+        { opacity: 0, scale: 0, duration: 0.4 }
+      )
+    });
+  });
+</script>
+
+<section class="relative min-h-screen flex flex-col items-center justify-center bg-slate-950 py-20 overflow-hidden">
+  
+  <h2 class="text-blue-400 font-bold text-2xl mb-12">Nuestros Momentos</h2>
+
+  <div class="slider-container relative w-[300px] h-[450px]">
+    <div class="slider w-full h-full relative">
+       {images.map((url, index) => (
+         <img class={`item item-${index + 1} object-cover rounded-2xl shadow-2xl`} src={url} />
+       ))}
+    </div>
+  </div>
+
+  <p class="text-white/50 mt-10 animate-bounce">Haz click para pasar...</p>
+</section>
+
+
+<style>
+.slider-container {
+  /* Evita que el renderizado de la carta "manche" el resto de la web */
+  will-change: transform; 
+  transform-style: preserve-3d;
+}
+.slider {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  perspective: 100px;
+  top: 30vh;
+  left: 50%;
+  transform: translateX(-50%)
+  
+}
+
+.item {
+  position: absolute;
+  width: 300px;
+  aspect-ratio: 2/3;
+  background: transparent;
+  backface-visibility: hidden;
+}
+
+button {
+  position: relative;
+  bottom: 0;
+  left: 50%;
+  transform: translatex(-50%);
+  width: 50%;
+  border: 0;
+  font-size: 24px;
+}
+
+.item:nth-child(5) {
+  left: 0;
+  top: 0;
+}
+.item:nth-child(4) {
+  left: 20px;
+  top: -20px;
+}
+.item:nth-child(3) {
+  left: 40px;
+  top: -40px;
+}
+.item:nth-child(2) {
+  left: 60px;
+  top: -60px;
+}
+.item:nth-child(1) {
+  left: 80px;
+  top: -80px;
+}
+</style>
