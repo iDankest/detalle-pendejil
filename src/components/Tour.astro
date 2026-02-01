@@ -20,42 +20,49 @@
   });
 
   // 2. Efecto Parallax en el Hover
-  const containers = document.querySelectorAll('.image-container');
-  containers.forEach(container => {
-    const hoverImg = container.querySelector('.hover-image');
-    
-    container.addEventListener('mousemove', (e: MouseEvent) => {
-      const { left, top, width, height } = container.getBoundingClientRect();
-      const xPos = (e.clientX - left) / width - 0.5;
-      const yPos = (e.clientY - top) / height - 0.5;
+const containers = document.querySelectorAll('.image-container');
 
-      gsap.to(hoverImg, {
-        x: xPos * 30, // Intensidad del movimiento
-        y: yPos * 30,
-        duration: 0.6,
-        ease: "power2.out"
-      });
-    });
+containers.forEach(el => {
+  // Hacemos el casting aquí
+  const container = el as HTMLElement;
+  const hoverImg = container.querySelector('.hover-image') as HTMLElement;
 
-    container.addEventListener('mouseleave', () => {
-      gsap.to(hoverImg, { x: 0, y: 0, duration: 0.6 });
+  if (!hoverImg) return; // Buena práctica: check de seguridad
+
+  container.addEventListener('mousemove', (e: MouseEvent) => {
+    const { left, top, width, height } = container.getBoundingClientRect();
+    const xPos = (e.clientX - left) / width - 0.5;
+    const yPos = (e.clientY - top) / height - 0.5;
+
+    gsap.to(hoverImg, {
+      x: xPos * 30,
+      y: yPos * 30,
+      duration: 0.6,
+      ease: "power2.out"
     });
   });
+
+  container.addEventListener('mouseleave', () => {
+    gsap.to(hoverImg, { x: 0, y: 0, duration: 0.6 });
+  });
+});
 </script>
 
 <section class="max-w-4xl mx-auto py-12 px-4 space-y-32">
+
   
+  <h3 class="tour-block text-4xl font-bold text-center text-blue-400 mb-16 italic overflow-hidden">Tour Pendejil</h3>
   <div class="tour-block flex flex-col md:flex-row items-center gap-8 group">
     <div class="image-container relative w-full md:w-1/2 aspect-square rounded-2xl overflow-hidden shadow-2xl border-4 border-white rotate-[-2deg] bg-gray-900">
-      <img src="/malaga-pen+pena.jpg" alt="Regalo" 
+      <img src="/Calcetin.png" alt="Regalo" 
            class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0 z-10" />
       
-      <img src="/carnaval.jpg" alt="Recuerdo" 
+      <img src="/cro.jpg" alt="Recuerdo" 
            class="hover-image absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100 scale-110" />
     </div>
     
     <div class="w-full md:w-1/2">
-      <h3 class="text-3xl font-bold text-pink-400 mb-4 italic">¿Recuerdas el croasange? 🐊</h3>
+      <h3 class="text-3xl font-bold text-pink-400 mb-4 italic">¿Recuerdas el croissant? 🐊</h3>
       <p class="text-gray-300 font-serif text-lg leading-relaxed">
         Estos calcetines no son solo para que no pases frío estudiando. Son un homenaje a esa glotona que de pueblo en pueblo casi se pelea con un cocodrilo de pan.
       </p>
@@ -64,13 +71,29 @@
 
   <div class="tour-block flex flex-col md:flex-row-reverse items-center gap-8 group">
     <div class="image-container relative w-full md:w-1/2 aspect-square rounded-2xl overflow-hidden shadow-2xl border-4 border-white rotate-[2deg] bg-gray-900">
-      <img src="/otro-regalo.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0 z-10" />
-      <img src="/otro-recuerdo.jpg" class="hover-image absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100 scale-110" />
+      <img src="dedoo.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0 z-10" />
+      <img src="/Dedito.jpg" class="hover-image absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100 scale-110" />
     </div>
     <div class="w-full md:w-1/2 text-right">
-      <h3 class="text-3xl font-bold text-blue-400 mb-4 italic">Un pequeño detalle ✨</h3>
+      <h3 class="text-3xl font-bold text-blue-400 mb-4 italic">El dedo que te representa 🖕</h3>
       <p class="text-gray-300 font-serif text-lg leading-relaxed">
-        Porque sé que a veces necesitas un "reset" mental entre tema y tema. Este objeto es para que te acuerdes de que hay vida fuera de los apuntes.
+        Siempre buscas el momento para enseñarme el dichoso dedo hasta debajo del agua. 
+      </p>
+    </div>
+  </div>
+    <div class="tour-block flex flex-col md:flex-row items-center gap-8 group">
+    <div class="image-container relative w-full md:w-1/2 aspect-square rounded-2xl overflow-hidden shadow-2xl border-4 border-white rotate-[-2deg] bg-gray-900">
+      <img src="perry.jpg" alt="Regalo" 
+           class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0 z-10" />
+      
+      <img src="/estupidos.jpg" alt="Recuerdo" 
+           class="hover-image absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100 scale-110" />
+    </div>
+    
+    <div class="w-full md:w-1/2">
+      <h3 class="text-3xl font-bold text-pink-400 mb-4 italic">Bau, chica, bau au. Conexion pendejil! 🪤</h3>
+      <p class="text-gray-300 font-serif text-lg leading-relaxed">
+        Este Perry reprecenta esos momentos donde nos robabamos las neuronas mutuamente y nos terminavamos las frases de lo estupidos que somos.
       </p>
     </div>
   </div>
