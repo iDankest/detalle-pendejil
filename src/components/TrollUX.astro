@@ -1,0 +1,75 @@
+<div id="troll-screen" class="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center p-6 text-center">
+  
+  <div class="mb-6 animate-bounce">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+    </svg>
+  </div>
+
+  <h2 id="troll-title" class="text-3xl font-bold text-red-500 mb-4 uppercase tracking-tighter">
+    ⚠️ ERROR DE SISTEMA ⚠️
+  </h2>
+
+  <p id="troll-text" class="text-white font-mono text-lg mb-8 max-w-md">
+    Se ha detectado una intrusión de nivel "Pendeja Agobiada". ¿En serio creías que iba a ser tan fácil ver el regalo?
+  </p>
+
+  <button id="troll-btn" class="bg-red-600 text-white px-8 py-4 rounded-full font-bold text-xl shadow-[0_0_20px_rgba(220,38,38,0.5)] transition-all">
+    DEJAR DE SER PENDEJA
+  </button>
+
+  <p class="mt-8 text-gray-500 text-sm italic">
+    * Tu neurona ha sido puesta en cuarentena por exceso de leyes.
+  </p>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+
+  const btn = document.querySelector('#troll-btn') as HTMLElement;
+  const screen = document.querySelector('#troll-screen') as HTMLElement;
+  const text = document.querySelector('#troll-text') as HTMLElement;
+  const title = document.querySelector('#troll-title') as HTMLElement;
+
+  let escapes = 0;
+
+  // El botón se escapa 3 veces antes de dejarse pulsar
+  btn.addEventListener('mouseover', () => {
+    if (escapes < 3) {
+      const x = (Math.random() - 0.5) * 400;
+      const y = (Math.random() - 0.5) * 400;
+      
+      gsap.to(btn, {
+        x: x,
+        y: y,
+        duration: 0.2,
+        ease: "power2.out"
+      });
+      
+      escapes++;
+      
+      if (escapes === 1) text.innerText = "¿Pero qué haces? ¿Tan desesperada estás?";
+      if (escapes === 2) text.innerText = "Ni con los reflejos del cocodrilo de croasán lo pillas...";
+      if (escapes === 3) {
+          text.innerText = "Vale, te dejo... pulsa ahora si tienes lo que hay que tener.";
+          gsap.to(btn, { x: 0, y: 0, backgroundColor: "#16a34a", duration: 0.5 });
+          btn.innerText = "ACCEDER AL REGALO";
+      }
+    }
+  });
+
+  // Cuando finalmente lo pulsa
+  btn.addEventListener('click', () => {
+    if (escapes >= 3) {
+      const tl = gsap.timeline();
+      
+      tl.to([btn, text, title], { opacity: 0, y: -20, stagger: 0.1 })
+        .to(screen, { 
+          clipPath: "circle(0% at 50% 50%)", 
+          duration: 1, 
+          ease: "expo.inOut" 
+        })
+        .set(screen, { display: 'none' });
+    }
+  });
+</script>
