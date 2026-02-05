@@ -1,5 +1,11 @@
 <div id="troll-screen" class="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center p-6 text-center">
   
+  <div class="md:hidden mb-4 px-4 py-2 bg-yellow-900/30 border border-yellow-600 rounded-lg animate-pulse">
+    <p class="text-yellow-500 text-xs font-mono">
+      ⚠️ OPTIMIZADO PARA PC. EN MÓVIL NO PODRÉ VACILARTE IGUAL. ⚠️
+    </p>
+  </div>
+
   <div class="mb-6 animate-bounce">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -11,16 +17,21 @@
   </h2>
 
   <p id="troll-text" class="text-white font-mono text-lg mb-8 max-w-md">
-    Se ha detectado una intrusión de nivel "Pendeja Agobiada". ¿En serio creías que iba a ser tan fácil ver el regalo?
+    Se ha detectado una intrusión de nivel "Pendeja Agobiada". ¿A que querias mas regalos?
   </p>
 
   <button id="troll-btn" class="bg-red-600 text-white px-8 py-4 rounded-full font-bold text-xl shadow-[0_0_20px_rgba(220,38,38,0.5)] transition-all">
     DEJAR DE SER PENDEJA
   </button>
 
-  <p class="mt-8 text-gray-500 text-sm italic">
-    * Tu neurona ha sido puesta en cuarentena por exceso de leyes.
-  </p>
+  <div class="mt-8 space-y-2">
+    <p class="text-gray-500 text-sm italic block">
+      * Tu neurona ha sido puesta en cuarentena por exceso de leyes.
+    </p>
+    <p class="text-blue-500/50 text-[10px] font-mono uppercase tracking-widest hidden md:block">
+      Recomendado: Usar ratón para una experiencia 100% troll
+    </p>
+  </div>
 </div>
 
 <script>
@@ -33,8 +44,8 @@
 
   let escapes = 0;
 
-  // El botón se escapa 3 veces antes de dejarse pulsar
-  btn.addEventListener('mouseover', () => {
+  // Soporte para PC (Mouse) y un pequeño guiño para Móvil (Touch)
+  const handleEscape = () => {
     if (escapes < 3) {
       const x = (Math.random() - 0.5) * 400;
       const y = (Math.random() - 0.5) * 400;
@@ -56,13 +67,21 @@
           btn.innerText = "ACCEDER AL REGALO";
       }
     }
+  };
+
+  btn.addEventListener('mouseover', handleEscape);
+  
+  // En móviles, si lo toca, también se escapa una vez para que no se piense que es un bug
+  btn.addEventListener('touchstart', (e) => {
+    if (escapes < 3) {
+      e.preventDefault(); // Evita que el primer toque haga click
+      handleEscape();
+    }
   });
 
-  // Cuando finalmente lo pulsa
   btn.addEventListener('click', () => {
     if (escapes >= 3) {
       const tl = gsap.timeline();
-      
       tl.to([btn, text, title], { opacity: 0, y: -20, stagger: 0.1 })
         .to(screen, { 
           clipPath: "circle(0% at 50% 50%)", 
